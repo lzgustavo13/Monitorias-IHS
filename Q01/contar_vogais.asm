@@ -1,11 +1,9 @@
-; comentarios
-
 ORG 0x7C00
 BITS 16
 
 jmp start
 
-hello_world: db "BANCO de DadOs", 0x0D, 0x0A, 0
+mensagem: db "Andson Bala", 0x0D, 0x0A, 0
 
 start:
     xor ax, ax
@@ -13,10 +11,8 @@ start:
     mov es, ax
     mov ss, ax
 
-    mov si, hello_world
+    mov si, mensagem
     call print_string
-
-    mov ax, 0
     call print_number
 
 end:
@@ -25,12 +21,14 @@ end:
 
 print_string:
     .loop:
-        lodsb; carrega em al byte[hello_world]
+        lodsb; carrega em al byte[mensagem]
         cmp al, 0
         je .end
 
         ;mov ah, 0x0E
-        ;int 0x10
+        ;int 0x10 -caso necessário printar a mensagem retirar comentário
+
+        ;cmp para saber se é vogal
         cmp al, 'a'
         je .inc
         cmp al, 'e'
@@ -53,6 +51,7 @@ print_string:
         je .inc
         jmp .loop
 
+        ;label para incrementar
         .inc:
             inc cx
             jmp .loop
@@ -60,7 +59,7 @@ print_string:
     .end:
         ret
 
-print_number:
+print_number: ;printar ax
     mov ax, cx
     mov bx, 10
     mov cx, 0
