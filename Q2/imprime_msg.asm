@@ -16,6 +16,7 @@ buffer db 256
 start:
 
 configurando_ivt:
+    cli
     push ds
     xor ax, ax
     mov ds, ax ;; por garantia, pode ds != 0
